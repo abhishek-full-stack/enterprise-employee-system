@@ -1,0 +1,25 @@
+# Build folders
+bin/
+obj/
+
+# Node modules
+node_modules/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Environment files
+.env
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
