@@ -1,4 +1,6 @@
 using EmployeeManagement.API.Data;
+using EmployeeManagement.API.Repositories;
+using EmployeeManagement.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,10 +9,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// Add controllers support for MVC-style controllers
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register repository and service for dependency injection
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 var app = builder.Build();
 
@@ -21,7 +29,13 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+// Map controller routes
+app.MapControllers();
+
 app.UseHttpsRedirection();
+
+// Global exception handling middleware
+app.UseMiddleware<EmployeeManagement.API.Middleware.ExceptionHandlingMiddleware>();
 
 var summaries = new[]
 {
