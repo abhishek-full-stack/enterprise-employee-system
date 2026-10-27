@@ -4,6 +4,10 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Avoid duplicate assembly attributes generation (handled by SDK) -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- Also avoid generating the TargetFrameworkAttribute to prevent duplicate TargetFrameworkAttribute errors -->
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,14 +21,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="NUnit" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.9.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Middleware\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Services\" />
+    <None Include=".github\copilot-instructions.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="tests\EmployeeManagement.API.Tests\Middleware\" />
+    <Folder Include="tests\EmployeeManagement.API.Tests\Services\" />
   </ItemGroup>
 
 </Project>
