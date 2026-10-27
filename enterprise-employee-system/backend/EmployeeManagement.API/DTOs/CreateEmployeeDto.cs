@@ -1,0 +1,32 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace EmployeeManagement.API.DTOs
+{
+    public class CreateEmployeeDto
+    {
+        [Required]
+        [MaxLength(100)]
+        public string FirstName { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(100)]
+        public string LastName { get; set; } = string.Empty;
+
+        [Required]
+        [EmailAddress]
+        [MaxLength(200)]
+        public string Email { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(100)]
+        public string Department { get; set; } = string.Empty;
+
+        [Required]
+        [Range(0, 99999999)]
+        public decimal Salary { get; set; }
+
+        [Required]
+        public DateTime DateOfJoining { get; set; }
+    }
+}
